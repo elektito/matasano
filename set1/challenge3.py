@@ -19,11 +19,12 @@ def english_score(s):
 def xor_with_character(s, c):
     return ''.join([chr(ord(i) ^ ord(c)) for i in s.decode('hex')]).encode('hex')
 
-s = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
+if __name__ == '__debug__':
+    s = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
 
-results = []
-for i in xrange(0, 256):
-    candidate = xor_with_character(s, chr(i)).decode('hex')
-    results.append((english_score(candidate), candidate))
+    results = []
+    for i in xrange(0, 256):
+        candidate = xor_with_character(s, chr(i)).decode('hex')
+        results.append((english_score(candidate), candidate))
 
-print 'Likeliest to be English:', max(results, key=lambda i: i[0])[1]
+    print 'Likeliest to be English:', max(results, key=lambda i: i[0])[1]
