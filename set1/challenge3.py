@@ -2,10 +2,10 @@ def english_score(s):
     # The following letter scores are based on the probability of the
     # each English letter taken from
     # http://en.wikipedia.org/wiki/Letter_frequency
-    letters = 'zqxjkvbpygfwmucldrhsnioate '
+    letters = 'zqxjkvbpygfwmucldrhsnioate .,'
     scores = [74, 95, 150, 153, 772, 978, 1492, 1929, 1974, 2015,
               2228, 2360, 2406, 2758, 2782, 4025, 4253, 5987, 6094,
-              6327, 6749, 6966, 7507, 8167, 9056, 12702, 5000]
+              6327, 6749, 6966, 7507, 8167, 9056, 12702, 5000, 1000, 500]
 
     s = s.lower()
     r = 0
@@ -13,6 +13,8 @@ def english_score(s):
         if c in letters:
             i = letters.index(c)
             r += scores[i]
+        elif ord(c) < 32 or ord(c) > 127:
+            r -= 1000
 
     return float(r) / len(s) if len(s) > 0 else 0
 
