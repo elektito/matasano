@@ -19,7 +19,7 @@ def english_score(s):
 def xor_with_character(s, c):
     return ''.join([chr(ord(i) ^ ord(c)) for i in s.decode('hex')]).encode('hex')
 
-if __name__ == '__debug__':
+if __name__ == '__main__':
     s = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
 
     results = []
