@@ -59,11 +59,15 @@ def break_repeating_key_with_keysize(data, keysize):
     chunks = [most_likely_xor_char_english_decoding(i)
               for i in chunks]
 
+    # Separate the decrypted data and password.
+    password = ''.join(chr(i[1]) for i in chunks)
+    chunks = [i[0] for i in chunks]
+
     # transpose again
     chunks = map(lambda i: ''.join(i),
                  izip_longest(*chunks, fillvalue=''))
 
-    return ''.join(chunks)
+    return ''.join(chunks), password
 
 if __name__ == '__main__':
     with open('6.txt') as i:
@@ -73,4 +77,6 @@ if __name__ == '__main__':
     keysizes = likeliest_key_sizes(data, 2, 50, 5)
     print 'likeliest keysize:', keysizes[0]
     print
-    print break_repeating_key_with_keysize(data, keysizes[0])
+    data, password = break_repeating_key_with_keysize(data, keysizes[0])
+    print data
+    print 'password:', password

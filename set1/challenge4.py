@@ -4,8 +4,9 @@ def most_likely_xor_char_english_decoding(s):
     results = []
     for i in xrange(0, 256):
         candidate = xor_with_character(s, chr(i))
-        results.append((english_score(candidate), candidate))
-    return max(results, key=lambda i: i[0])[1]
+        results.append((english_score(candidate), candidate, i))
+    r = max(results, key=lambda i: i[0])
+    return r[1], r[2]
 
 def readlines(filename):
     lines = []
@@ -24,9 +25,10 @@ if __name__ == '__main__':
 
     results = []
     for l in lines:
-        s = most_likely_xor_char_english_decoding(l.decode('hex'))
-        results.append((english_score(s), s, l))
+        s, char = most_likely_xor_char_english_decoding(l.decode('hex'))
+        results.append((english_score(s), s, l, char))
 
-    score, decoding, line = max(results, key=lambda i: i[0])
+    score, decoding, line, char = max(results, key=lambda i: i[0])
     print 'The most likely line:', line
     print 'Decodes to:', decoding
+    print 'The character used for encoding:', char
