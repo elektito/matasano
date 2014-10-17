@@ -56,7 +56,7 @@ def break_repeating_key_with_keysize(data, keysize):
                  izip_longest(*chunks, fillvalue=''))
 
     # now solve each chunk for one character
-    chunks = [most_likely_xor_char_english_decoding(i.encode('hex'))
+    chunks = [most_likely_xor_char_english_decoding(i)
               for i in chunks]
 
     # transpose again

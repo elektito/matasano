@@ -3,7 +3,7 @@ from challenge3 import xor_with_character, english_score
 def most_likely_xor_char_english_decoding(s):
     results = []
     for i in xrange(0, 256):
-        candidate = xor_with_character(s, chr(i)).decode('hex')
+        candidate = xor_with_character(s, chr(i))
         results.append((english_score(candidate), candidate))
     return max(results, key=lambda i: i[0])[1]
 
@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
     results = []
     for l in lines:
-        s = most_likely_xor_char_english_decoding(l)
+        s = most_likely_xor_char_english_decoding(l.decode('hex'))
         results.append((english_score(s), s, l))
 
     score, decoding, line = max(results, key=lambda i: i[0])
